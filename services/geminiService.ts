@@ -97,7 +97,11 @@ export const prefetchAudio = async (text: string, lang: string) => {
 
   try {
     const ai = new GoogleGenAI({ apiKey: API_KEY });
-    const instruction = `Speak naturally in ${lang}. The word is: ${text}`;
+    const instruction = `
+      Task: Speak for an autistic child.
+      Tone: Calm, clear, steady.
+      Word in ${lang}: "${text}"
+    `;
 
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash-preview-tts",
@@ -134,11 +138,22 @@ export const speakWord = async (text: string, lang: string, playbackRate: number
     }
 
     const ai = new GoogleGenAI({ apiKey: API_KEY });
-    const instruction = instructionOverride || `Speak naturally, calmly and clearly in ${lang}. Be friendly and patient. The word is: ${text}`;
+    // Base instruction for Autism-friendly TTS
+    const baseInstruction = instructionOverride || `
+      Task: Speak the following word/phrase for an autistic child (age 6-13).
+      Tone: Calm, clear, steady, and friendly.
+      Rules:
+      1. Articulate every syllable distinctly.
+      2. Keep a steady pace. Do NOT speak too fast.
+      3. Avoid sudden loudness or aggressive intonation.
+      4. Be encouraging but not overstimulating.
+      
+      Word/Phrase to speak in ${lang}: "${text}"
+    `;
 
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash-preview-tts",
-      contents: [{ parts: [{ text: instruction }] }],
+      contents: [{ parts: [{ text: baseInstruction }] }],
       config: {
         responseModalities: [Modality.AUDIO],
         speechConfig: {
@@ -166,9 +181,19 @@ export const speakWord = async (text: string, lang: string, playbackRate: number
 };
 
 export const speakMascot = async (text: string, lang: string, mascotName: string) => {
-  const instruction = `You are ${mascotName}, a very calm, patient and friendly animal mascot for children. 
-  Speak this sentence in ${lang} with an extremely soothing and warm voice. Use a very slow and clear pace. 
-  Sentence: "${text}"`;
+  const instruction = `
+    Roleplay: You are ${mascotName}, a supportive companion for an autistic child.
+    Voice Personality: Very calm, patient, warm, and hyper-articulate.
+    Target Audience: Autistic children (6-13 years).
+    
+    Instructions:
+    1. Speak slowly and clearly.
+    2. Use a soothing, reassuring tone.
+    3. No loud surprises.
+    4. If ${mascotName} is an animal, DO NOT make animal noises, just speak in a human voice with that character's vibe (e.g. Owl = wise/slow).
+    
+    Say this in ${lang}: "${text}"
+  `;
 
   return speakWord(text, lang, 0.9, instruction);
 };

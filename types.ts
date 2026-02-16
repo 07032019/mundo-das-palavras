@@ -6,6 +6,7 @@ export interface MascotInfo {
   name: string;
   emoji: string;
   description: string;
+  personality: string; // New field for TTS persona
 }
 
 export interface LanguageTheme {

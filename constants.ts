@@ -2,14 +2,14 @@
 import { WordItem, Language, Module, LogicSequence, LanguageTheme, MascotInfo } from './types';
 
 export const MASCOTS: MascotInfo[] = [
-  { id: 'kika', name: 'Kika', emoji: '🦜', description: 'Uma Arara-azul muito alegre.' },
-  { id: 'ollie', name: 'Ollie', emoji: '🦉', description: 'Uma Coruja sábia e paciente.' },
-  { id: 'tico', name: 'Tico', emoji: '🐢', description: 'Uma Tartaruga calma e amiga.' },
-  { id: 'lulu', name: 'Lulu', emoji: '🐈', description: 'Uma Gatinha carinhosa.' },
-  { id: 'pippo', name: 'Pippo', emoji: '🐬', description: 'Um Golfinho brincalhão.' },
-  { id: 'ming', name: 'Ming', emoji: '🐼', description: 'Um Panda muito sereno.' },
-  { id: 'duque', name: 'Duque', emoji: '🐕', description: 'Um Cãozinho leal.' },
-  { id: 'bela', name: 'Bela', emoji: '🦋', description: 'Uma Borboleta mágica.' },
+  { id: 'kika', name: 'Kika', emoji: '🦜', description: 'Uma Arara-azul muito alegre.', personality: 'Playful, bright, and encouraging. Speaks with a slightly higher pitch but very clearly. Like a friendly big sister.' },
+  { id: 'ollie', name: 'Ollie', emoji: '🦉', description: 'Uma Coruja sábia e paciente.', personality: 'Wise, calm, and slow. Speaks with a deeper, comforting, and steady tone. Like a kind grandparent.' },
+  { id: 'tico', name: 'Tico', emoji: '🐢', description: 'Uma Tartaruga calma e amiga.', personality: 'Very slow, relaxed, and gentle. Takes pauses between phrases. Extremely soothing.' },
+  { id: 'lulu', name: 'Lulu', emoji: '🐈', description: 'Uma Gatinha carinhosa.', personality: 'Soft, whispery, and sweet. Speaks gently and warmly. Very comforting.' },
+  { id: 'pippo', name: 'Pippo', emoji: '🐬', description: 'Um Golfinho brincalhão.', personality: 'Energetic but smooth. Sounds happy and melodic, like singing a little bit.' },
+  { id: 'ming', name: 'Ming', emoji: '🐼', description: 'Um Panda muito sereno.', personality: 'Peaceful, zen, and quiet. Speaks with a soft, round tone. Very grounding.' },
+  { id: 'duque', name: 'Duque', emoji: '🐕', description: 'Um Cãozinho leal.', personality: 'Loyal, enthusiastic but controlled. Trustworthy and solid tone. Like a best friend.' },
+  { id: 'bela', name: 'Bela', emoji: '🦋', description: 'Uma Borboleta mágica.', personality: 'Light, airy, and delicate. Speaks with a high, gentle, fairy-like quality.' },
 ];
 
 export const LANGUAGE_THEMES: Record<Language, LanguageTheme> = {
