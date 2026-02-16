@@ -10,7 +10,7 @@ interface SettingsProps {
 }
 
 const Settings: React.FC<SettingsProps> = ({ settings, onUpdate, onBack }) => {
-  const rewardOptions: {id: AppSettings['enabledRewards'][number], label: string, icon: string}[] = [
+  const rewardOptions: { id: AppSettings['enabledRewards'][number], label: string, icon: string }[] = [
     { id: 'stickers', label: 'Figurinhas', icon: '🖼️' },
     { id: 'sounds', label: 'Sons', icon: '🎵' },
     { id: 'animations', label: 'Animações', icon: '✨' },
@@ -20,7 +20,7 @@ const Settings: React.FC<SettingsProps> = ({ settings, onUpdate, onBack }) => {
 
   const toggleReward = (id: AppSettings['enabledRewards'][number]) => {
     const current = settings.enabledRewards || [];
-    const updated = current.includes(id) 
+    const updated = current.includes(id)
       ? current.filter(r => r !== id)
       : [...current, id];
     onUpdate({ ...settings, enabledRewards: updated });
@@ -30,7 +30,7 @@ const Settings: React.FC<SettingsProps> = ({ settings, onUpdate, onBack }) => {
     <div className="space-y-8 animate-fade-in bg-white p-8 rounded-[2.5rem] shadow-xl max-w-2xl mx-auto pb-20">
       <div className="flex items-center gap-4 border-b pb-6">
         <button onClick={onBack} className="p-3 bg-slate-100 rounded-full hover:bg-slate-200 transition-colors">
-           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
         </button>
         <h2 className="text-3xl font-bold">Configurações para Pais</h2>
       </div>
@@ -45,11 +45,10 @@ const Settings: React.FC<SettingsProps> = ({ settings, onUpdate, onBack }) => {
           <div className="grid grid-cols-4 sm:grid-cols-4 gap-4">
             <button
               onClick={() => onUpdate({ ...settings, preferredMascotId: 'default' })}
-              className={`p-4 rounded-2xl border-2 flex flex-col items-center gap-2 transition-all ${
-                settings.preferredMascotId === 'default' 
-                ? 'bg-blue-600 border-blue-600 text-white shadow-md' 
-                : 'bg-slate-50 border-slate-100'
-              }`}
+              className={`p-4 rounded-2xl border-2 flex flex-col items-center gap-2 transition-all ${settings.preferredMascotId === 'default'
+                  ? 'bg-blue-600 border-blue-600 text-white shadow-md'
+                  : 'bg-slate-50 border-slate-100'
+                }`}
             >
               <span className="text-2xl">🌍</span>
               <span className="text-[10px] font-bold">Padrão</span>
@@ -58,11 +57,10 @@ const Settings: React.FC<SettingsProps> = ({ settings, onUpdate, onBack }) => {
               <button
                 key={m.id}
                 onClick={() => onUpdate({ ...settings, preferredMascotId: m.id })}
-                className={`p-4 rounded-2xl border-2 flex flex-col items-center gap-2 transition-all ${
-                  settings.preferredMascotId === m.id 
-                  ? 'bg-blue-600 border-blue-600 text-white shadow-md' 
-                  : 'bg-slate-50 border-slate-100'
-                }`}
+                className={`p-4 rounded-2xl border-2 flex flex-col items-center gap-2 transition-all ${settings.preferredMascotId === m.id
+                    ? 'bg-blue-600 border-blue-600 text-white shadow-md'
+                    : 'bg-slate-50 border-slate-100'
+                  }`}
               >
                 <span className="text-2xl">{m.emoji}</span>
                 <span className="text-[10px] font-bold">{m.name}</span>
@@ -81,11 +79,10 @@ const Settings: React.FC<SettingsProps> = ({ settings, onUpdate, onBack }) => {
               <button
                 key={opt.id}
                 onClick={() => toggleReward(opt.id)}
-                className={`px-4 py-3 rounded-2xl border-2 font-bold flex items-center gap-2 transition-all ${
-                  settings.enabledRewards?.includes(opt.id)
-                  ? 'bg-green-100 border-green-500 text-green-700'
-                  : 'bg-slate-50 border-slate-100 text-slate-400'
-                }`}
+                className={`px-4 py-3 rounded-2xl border-2 font-bold flex items-center gap-2 transition-all ${settings.enabledRewards?.includes(opt.id)
+                    ? 'bg-green-100 border-green-500 text-green-700'
+                    : 'bg-slate-50 border-slate-100 text-slate-400'
+                  }`}
               >
                 <span>{opt.icon}</span>
                 <span>{opt.label}</span>
@@ -103,11 +100,10 @@ const Settings: React.FC<SettingsProps> = ({ settings, onUpdate, onBack }) => {
               <button
                 key={intensity}
                 onClick={() => onUpdate({ ...settings, themeIntensity: intensity })}
-                className={`py-3 rounded-xl border-2 font-bold capitalize ${
-                  settings.themeIntensity === intensity 
-                  ? 'bg-blue-600 border-blue-600 text-white' 
-                  : 'bg-slate-50 border-slate-100'
-                }`}
+                className={`py-3 rounded-xl border-2 font-bold capitalize ${settings.themeIntensity === intensity
+                    ? 'bg-blue-600 border-blue-600 text-white'
+                    : 'bg-slate-50 border-slate-100'
+                  }`}
               >
                 {intensity}
               </button>
@@ -120,17 +116,15 @@ const Settings: React.FC<SettingsProps> = ({ settings, onUpdate, onBack }) => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <button
               onClick={() => onUpdate({ ...settings, calmMode: !settings.calmMode })}
-              className={`py-4 rounded-2xl border-2 font-bold transition-all ${
-                settings.calmMode ? 'bg-slate-700 text-white' : 'bg-slate-50'
-              }`}
+              className={`py-4 rounded-2xl border-2 font-bold transition-all ${settings.calmMode ? 'bg-slate-700 text-white' : 'bg-slate-50'
+                }`}
             >
               {settings.calmMode ? 'Modo Calmante ON' : 'Modo Calmante OFF'}
             </button>
             <button
               onClick={() => onUpdate({ ...settings, highContrast: !settings.highContrast })}
-              className={`py-4 rounded-2xl border-2 font-bold transition-all ${
-                settings.highContrast ? 'bg-black text-yellow-400' : 'bg-slate-50'
-              }`}
+              className={`py-4 rounded-2xl border-2 font-bold transition-all ${settings.highContrast ? 'bg-black text-yellow-400' : 'bg-slate-50'
+                }`}
             >
               Alto Contraste
             </button>
@@ -138,7 +132,32 @@ const Settings: React.FC<SettingsProps> = ({ settings, onUpdate, onBack }) => {
         </section>
       </div>
 
-      <button 
+      <section className="space-y-4">
+        <h3 className="text-xl font-bold flex items-center gap-2">
+          <span className="text-2xl">⏩</span> Velocidade do Áudio
+        </h3>
+        <div className="bg-slate-50 p-6 rounded-2xl border-2 border-slate-100">
+          <div className="flex justify-between mb-2 font-bold text-slate-600">
+            <span>Lento</span>
+            <span>Normal</span>
+            <span>Rápido</span>
+          </div>
+          <input
+            type="range"
+            min="0.5"
+            max="1.5"
+            step="0.1"
+            value={settings.audioSpeed}
+            onChange={(e) => onUpdate({ ...settings, audioSpeed: parseFloat(e.target.value) })}
+            className="w-full h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+          />
+          <div className="text-center mt-2 font-bold text-blue-600">
+            {settings.audioSpeed.toFixed(1)}x
+          </div>
+        </div>
+      </section>
+
+      <button
         onClick={onBack}
         className="w-full mt-12 py-6 bg-green-500 text-white rounded-[2rem] font-bold text-xl shadow-xl hover:bg-green-600 transition-all"
       >
