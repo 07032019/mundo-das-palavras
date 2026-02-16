@@ -1,0 +1,7 @@
+{
+  "name": "Mundo das Palavras",
+  "description": "Um aplicativo educacional inclusivo projetado para apoiar crianças autistas no aprendizado de novos idiomas através de jogos interativos, feedback visual suave e áudio claro.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
