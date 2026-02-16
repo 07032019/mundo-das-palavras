@@ -13,56 +13,56 @@ export const MASCOTS: MascotInfo[] = [
 ];
 
 export const LANGUAGE_THEMES: Record<Language, LanguageTheme> = {
-  pt: { 
-    primary: 'bg-blue-500', 
-    secondary: 'text-blue-600', 
-    bg: 'bg-blue-50', 
-    scenario: 'Parque das Pipas', 
+  pt: {
+    primary: 'bg-blue-500',
+    secondary: 'text-blue-600',
+    bg: 'bg-blue-50',
+    scenario: 'Parque das Pipas',
     icon: '🪁',
     mascotId: 'kika',
     welcomeMsg: { pt: 'Oi! Eu sou a Kika. Vamos brincar no parque?', en: '', es: '', fr: '', it: '', zh: '' }
   },
-  en: { 
-    primary: 'bg-emerald-500', 
-    secondary: 'text-emerald-600', 
-    bg: 'bg-emerald-50', 
-    scenario: 'Floresta Encantada', 
+  en: {
+    primary: 'bg-emerald-500',
+    secondary: 'text-emerald-600',
+    bg: 'bg-emerald-50',
+    scenario: 'Floresta Encantada',
     icon: '🌲',
     mascotId: 'ollie',
     welcomeMsg: { en: 'Hello! I am Ollie. Ready for a forest adventure?', pt: '', es: '', fr: '', it: '', zh: '' }
   },
-  es: { 
-    primary: 'bg-amber-500', 
-    secondary: 'text-amber-600', 
-    bg: 'bg-amber-50', 
-    scenario: 'Ilha do Sol', 
+  es: {
+    primary: 'bg-amber-500',
+    secondary: 'text-amber-600',
+    bg: 'bg-amber-50',
+    scenario: 'Ilha do Sol',
     icon: '☀️',
     mascotId: 'tico',
     welcomeMsg: { es: '¡Hola! Soy Tico. ¿Buscamos tesoros en la isla?', pt: '', en: '', fr: '', it: '', zh: '' }
   },
-  fr: { 
-    primary: 'bg-purple-500', 
-    secondary: 'text-purple-600', 
-    bg: 'bg-purple-50', 
-    scenario: 'Reino das Estrelas', 
+  fr: {
+    primary: 'bg-purple-500',
+    secondary: 'text-purple-600',
+    bg: 'bg-purple-50',
+    scenario: 'Reino das Estrelas',
     icon: '🏰',
     mascotId: 'lulu',
     welcomeMsg: { fr: 'Bonjour ! Je suis Lulu. On voyage vers les étoiles ?', pt: '', en: '', es: '', it: '', zh: '' }
   },
-  it: { 
-    primary: 'bg-orange-400', 
-    secondary: 'text-orange-500', 
-    bg: 'bg-orange-50', 
-    scenario: 'Vale das Flores', 
+  it: {
+    primary: 'bg-orange-400',
+    secondary: 'text-orange-500',
+    bg: 'bg-orange-50',
+    scenario: 'Vale das Flores',
     icon: '🌻',
     mascotId: 'pippo',
     welcomeMsg: { it: 'Ciao! Sono Pippo. Vuoi scoprire i fiori con me?', pt: '', en: '', es: '', fr: '', zh: '' }
   },
-  zh: { 
-    primary: 'bg-rose-400', 
-    secondary: 'text-rose-500', 
-    bg: 'bg-rose-50', 
-    scenario: 'Jardim dos Pandas', 
+  zh: {
+    primary: 'bg-rose-400',
+    secondary: 'text-rose-500',
+    bg: 'bg-rose-50',
+    scenario: 'Jardim dos Pandas',
     icon: '🎋',
     mascotId: 'ming',
     welcomeMsg: { zh: '你好！我是小明。我们一起在花园里散步吧', pt: '', en: '', es: '', fr: '', it: '' }
@@ -70,7 +70,7 @@ export const LANGUAGE_THEMES: Record<Language, LanguageTheme> = {
 };
 
 export const LANGUAGES: { code: Language; label: string; flag: string; native: string }[] = [
-  { code: 'pt', label: 'Português', native: 'Português', flag: '🇧🇷' },
+  { code: 'pt', label: 'Português do Brasil', native: 'Português', flag: '🇧🇷' },
   { code: 'en', label: 'Inglês', native: 'English', flag: '🇺🇸' },
   { code: 'es', label: 'Espanhol', native: 'Español', flag: '🇪🇸' },
   { code: 'fr', label: 'Francês', native: 'Français', flag: '🇫🇷' },

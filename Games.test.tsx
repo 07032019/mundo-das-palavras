@@ -25,6 +25,7 @@ vi.mock('./services/geminiService', () => ({
     speakGuided: vi.fn(),
     speakFeedback: vi.fn(),
     playUISound: vi.fn(),
+    prefetchAudio: vi.fn(),
 }));
 
 describe('Games Integration', () => {

@@ -88,11 +88,17 @@ export const playUISound = (type: 'success' | 'click' | 'pop', enabled: boolean 
   }
 };
 
-export const speakWord = async (text: string, lang: string, playbackRate: number = 1.0, instructionOverride?: string) => {
+
+const AUDIO_CACHE = new Map<string, AudioBuffer>();
+
+export const prefetchAudio = async (text: string, lang: string) => {
+  const cacheKey = `${text}-${lang}`;
+  if (AUDIO_CACHE.has(cacheKey)) return;
+
   try {
     const ai = new GoogleGenAI({ apiKey: API_KEY });
-    const instruction = instructionOverride || `Speak naturally, calmly and clearly in ${lang}. Be friendly and patient. The word is: ${text}`;
-    
+    const instruction = `Speak naturally in ${lang}. The word is: ${text}`;
+
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash-preview-tts",
       contents: [{ parts: [{ text: instruction }] }],
@@ -110,13 +116,51 @@ export const speakWord = async (text: string, lang: string, playbackRate: number
     if (base64Audio) {
       const outputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
       const audioBuffer = await decodeAudioData(decode(base64Audio), outputAudioContext, 24000, 1);
+      AUDIO_CACHE.set(cacheKey, audioBuffer);
+    }
+  } catch (error) {
+    console.error("Prefetch Error:", error);
+  }
+};
+
+export const speakWord = async (text: string, lang: string, playbackRate: number = 1.0, instructionOverride?: string) => {
+  const cacheKey = `${text}-${lang}`;
+
+  try {
+    if (AUDIO_CACHE.has(cacheKey)) {
+      const buffer = AUDIO_CACHE.get(cacheKey)!;
+      playAudioBuffer(buffer, playbackRate);
+      return;
+    }
+
+    const ai = new GoogleGenAI({ apiKey: API_KEY });
+    const instruction = instructionOverride || `Speak naturally, calmly and clearly in ${lang}. Be friendly and patient. The word is: ${text}`;
+
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash-preview-tts",
+      contents: [{ parts: [{ text: instruction }] }],
+      config: {
+        responseModalities: [Modality.AUDIO],
+        speechConfig: {
+          voiceConfig: {
+            prebuiltVoiceConfig: { voiceName: 'Kore' },
+          },
+        },
+      },
+    });
+
+    const base64Audio = response.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
+    if (base64Audio) {
+      const outputAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
+      const audioBuffer = await decodeAudioData(decode(base64Audio), outputAudioContext, 24000, 1);
+      AUDIO_CACHE.set(cacheKey, audioBuffer);
       playAudioBuffer(audioBuffer, playbackRate);
     }
   } catch (error) {
     console.error("TTS Error:", error);
     const msg = new SpeechSynthesisUtterance(text);
     msg.lang = lang;
-    msg.rate = playbackRate * 0.8; 
+    msg.rate = playbackRate * 0.8;
     window.speechSynthesis.speak(msg);
   }
 };
@@ -125,21 +169,24 @@ export const speakMascot = async (text: string, lang: string, mascotName: string
   const instruction = `You are ${mascotName}, a very calm, patient and friendly animal mascot for children. 
   Speak this sentence in ${lang} with an extremely soothing and warm voice. Use a very slow and clear pace. 
   Sentence: "${text}"`;
-  
+
   return speakWord(text, lang, 0.9, instruction);
 };
 
 export const speakGuided = async (text: string, lang: string) => {
+  // Guided mode is dynamic and complex, usually valid to generate fresh or use separate cache keys if needed.
+  // For simplicity, we won't cache guided sequence yet or use unique keys.
   const instruction = `Speak the word "${text}" in ${lang} twice. 
   First time: Speak very slowly, syllable by syllable, clearly.
   Then pause for 2 seconds.
   Second time: Speak at a normal, friendly, and encouraging speed.`;
-  
+
   return speakWord(text, lang, 1.0, instruction);
 };
 
 export const speakFeedback = async (lang: string) => {
   const phrases = FEEDBACK_PHRASES[lang] || FEEDBACK_PHRASES['en'];
   const phrase = phrases[Math.floor(Math.random() * phrases.length)];
+  // We can cache feedback phrases too if we want
   return speakWord(phrase, lang, 1.0, `Say this positive feedback phrase in a happy and encouraging voice: ${phrase}`);
 };
